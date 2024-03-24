@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="container post">
+        <h1><p>{{ blogs.title }}</p></h1>
+        <small><p>{{ blogs.author }}</p></small> <small>{{blogs.get_readtime}}</small>
+        {% if blogs.header_image %}
+        <img src="{{ blogs.header_image.url  }}" alt="" width="100%">
+        {% endif %}
+        <p>{{ blogs.body | safe }}</p>
+    </div>
+
+{% endblock %}

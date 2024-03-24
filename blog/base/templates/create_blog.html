@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container post">
+    <div class="card p-2 shadow-lg border-0 rounded mt-0 mb-5">
+        <div class="card-header justify-content-center">
+            <h3 class="font-weight-light my-4 text-center">Create blog</h3>
+        </div>
+        <br>
+        <form method="POST" enctype="multipart/form-data" action=""> {% csrf_token %}
+            
+            {{form.as_p}}
+            <button class="col-md-4 btn btn-dark">Save</button> 
+        </form>
+    </div>
+</div>
+{% endblock %}

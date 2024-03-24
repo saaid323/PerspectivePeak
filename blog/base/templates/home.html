@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="container home">
+        <div class="blog" >
+            {% for blog in blogs %}
+            <a class="nav-link" href="{% url 'blog' blog.id %}">
+            <div class="header_and_image">
+                <div>
+                    <h3 class="font-weight-light my-4">{{ blog.title }}</h3>
+                </div>
+                <div>
+                {% if blog.header_image %}
+                    <p><img src="{{ blog.header_image.url  }}" alt="" style="width: 50%; margin-left: 90px;"></p>
+                {% endif %}
+                </div>
+            </div>
+            <h5 >{{ blog.body|slice:":120" | safe }}...</h5>
+            </a>
+            <small class="font-weight-light my-4">{{ blog.get_readtime }} read</small>
+            <br> <br>
+            
+            <ul>
+                <li>
+                    <a class="col-md-4s btn btn-dark" href="{% url 'update_blog' blog.id %}">edit</a>
+                </li>
+                <li>
+                    <a class="col-md-4s btn btn-dark" href="{% url 'delete_blog' blog.id %}">DELETE</a>
+                </li>
+            </ul>
+            
+            <hr>
+            {% endfor %}
+            
+        </div>
+    
+    </div>
+{% endblock %}

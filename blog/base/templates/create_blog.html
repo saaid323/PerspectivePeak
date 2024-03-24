@@ -7,7 +7,7 @@
         </div>
         <br>
         <form method="POST" enctype="multipart/form-data" action=""> {% csrf_token %}
-            
+            {{form.media}}
             {{form.as_p}}
             <button class="col-md-4 btn btn-dark">Save</button> 
         </form>

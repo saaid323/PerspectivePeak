@@ -16,9 +16,31 @@ def home(request):
 
 
 def blog(request, pk):
+    read_blogs_id =  request.session.get('read_blog', [])
+    if 'read_blog' not in request.session:
+        request.session['read_blog'] = []
+    if pk not in read_blogs_id:
+        request.session['read_blog'].insert(0, pk)
+        request.session.modified = True
     blogs = Blog.objects.get(id=pk)
     context = {'blogs': blogs}
     return render(request, 'blog.html', context)
+
+
+def user_history(request):
+    read_blog_ids = request.session.get('read_blog', [])[::-1]
+    read_history = Blog.objects.filter(id__in=read_blog_ids).order_by('id')
+    context = {'read_history': read_history}
+    return render(request, 'history.html', context)
+
+
+def delete_read_history(request, pk):
+    read_blog_ids = request.session.get('read_blog', [])
+    if pk in read_blog_ids:
+        read_blog_ids.remove(pk)
+        request.session['read_blog'] = read_blog_ids
+        request.session.modified = True
+    return redirect('history')
 
 
 @login_required(login_url='login')

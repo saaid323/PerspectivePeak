@@ -22,3 +22,12 @@ class Blog(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(default='images/users/default.jpg', upload_to='images/users')
+    bio = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username

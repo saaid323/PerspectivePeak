@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'login' %}
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                        <div class="card-header justify-content-center">
+                          <h3 class="font-weight-light my-4 text-center">Login</h3>
+                        </div>
+                        <form action="" method="POST"> {% csrf_token %}
+                            <div class="card login form">
+                                <div class="card-body container">
+                                    <div class="form-floating mb-3">
+                                        <label class="small mb-1" for="id_new_password1">User Name</label>
+                                        <input type="username" name="username" class="form-control" placeholder="User Name"/>
+                                        
+                                    </div>
+                                    <div class="form-floating">
+                                        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                        <label for="floatingPassword">Password</label>
+                                    </div>
+                                    <p></p>
+                                    <input class="col-md-4 btn btn-dark" type="submit" value="Login">
+
+                                    <p>Already signed up yet?</p>
+                                    <a class="col-md-4 btn btn-dark" href="{% url 'register' %}">Register</a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+    </div>
+</div>
+{% else %}
+<div>
+    <div class="">
+    <form action="" method="POST"> {% csrf_token %}
+        <div class="container card shadow p-5  rounded-lg mt-0 mb-3" >
+            <h3>Register</h3>
+            {% for field in form %}
+                {% if field.errors %}
+                {{ field.errors }}
+                {% endif %}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+            <br>
+            <input class="col-md-4 btn btn-dark" type="submit" value="Register">
+            <p>Already signed up yet?</p>
+            <a class="col-md-4 btn btn-dark" href="{% url 'login' %}" class="dropdown-item">Login</a>
+        </div>
+        
+    </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

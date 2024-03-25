@@ -1,0 +1,36 @@
+body {
+    font-family: 'source-serif-pro', 'Georgia', 'Cambria', "Times New Roman", 'Times', 'serif';
+}
+
+.home {
+    
+    margin: 0 auto;
+    width: 50%;
+    height: 100vh;
+}
+
+.blog {
+    margin-top: 30px;
+    margin-bottom: 120px;
+}
+
+.post {
+    margin: 50px auto;
+    width: 50%;
+    height: 100vh;
+}
+
+.card {
+    border: 80px;
+}
+.login {
+    margin-top: 40px;
+}
+.blog ul li {
+    display: inline-block;
+}
+
+.header_and_image {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}

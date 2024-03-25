@@ -32,3 +32,23 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
+
+
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}), max_length=32)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=32)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+
+
+class UpdateProfileForm(forms.ModelForm):
+    profile_pic = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    bio = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+
+    class Meta:
+        model = Profile
+        fields = ['profile_pic', 'bio']

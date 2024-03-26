@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Blog
-from .forms import BlogForm, UserForm, UpdateProfileForm, UpdateUserForm
+from .models import Blog, Comment
+from .forms import BlogForm, UserForm, UpdateProfileForm, UpdateUserForm, CommentForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -26,7 +26,19 @@ def blog(request, pk):
         request.session['read_blog'].insert(0, pk)
         request.session.modified = True
     blogs = Blog.objects.get(id=pk)
-    context = {'blogs': blogs}
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.blog = blogs
+            new_comment.user = request.user
+            new_comment.save()
+            return redirect('blog', pk=pk)
+        
+    
+    context = {'blogs': blogs, 'form': form}
     return render(request, 'blog.html', context)
 
 
@@ -145,3 +157,5 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('home')
+
+

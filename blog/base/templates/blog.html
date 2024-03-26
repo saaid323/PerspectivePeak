@@ -2,11 +2,42 @@
 {% block content %}
     <div class="container post">
         <h1><p>{{ blogs.title }}</p></h1>
-        <small><p>{{ blogs.author }}</p></small> <small>{{blogs.get_readtime}}</small>
+        <img class="dropdown-toggle" data-bs-toggle="dropdown" src="{{ blogs.author.profile.profile_pic.url }}"
+        alt="" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
+         <span> </span> <span> </span> <small>{{ blogs.author }}</small>
+
+        <p><small>{{blogs.get_readtime}} read</small> . <small>{{blogs.published}}</small></p>
+
         {% if blogs.header_image %}
         <img src="{{ blogs.header_image.url  }}" alt="" width="100%">
         {% endif %}
         <p>{{ blogs.body | safe }}</p>
+        <hr>
+        <br>
+        <form action="" method="post"> {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+        <hr>
+        
+
+        <h3>{{ blogs.comments.count }} comment{{ blogs.comments.count|pluralize }}</h3>
+
+        {% if not blogs.comments.all %}
+        <h6>Add comment</h6>
+        {% else %}
+        {% for comment in blogs.comments.all %}
+            <img class="dropdown-toggle" data-bs-toggle="dropdown" src="{{ comment.user.profile.profile_pic.url }}"
+            alt="" style="vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;">
+         <span> </span> <span> </span> <small>{{ comment.user.username }}</small> <span></span><small>{{ comment.created | timesince }}</small> ago
+         
+            <h4>{{ comment.body }}</h4>
+            <br><hr>
+        {% endfor %}
+        {% endif %}
+        <br><br> <br>
+        
+        
     </div>
 
 {% endblock %}

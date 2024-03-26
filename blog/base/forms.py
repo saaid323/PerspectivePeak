@@ -1,5 +1,5 @@
 from django import forms
-from .models import Blog, Profile
+from .models import Blog, Profile, Comment
 from django_ckeditor_5.widgets import CKEditor5Widget
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -52,3 +52,13 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_pic', 'bio']
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control','rows': 2}),
+        label='Comment')
+
+    class Meta:
+        model = Comment
+        fields = ['body']

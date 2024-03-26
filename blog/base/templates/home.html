@@ -9,9 +9,9 @@
                     <h3 class="font-weight-light my-4">{{ blog.title }}</h3>
                 </div>
                 <div>
-                {% if blog.header_image %}
-                    <p><img src="{{ blog.header_image.url  }}" alt="" style="width: 50%; margin-left: 90px;"></p>
-                {% endif %}
+                
+                <p><img src="{{ blog.header_image.url  }}" alt="" style="width: 50%; margin-left: 90px;"></p>
+                
                 </div>
             </div>
             <h5 >{{ blog.body|slice:":120" | safe }}...</h5>

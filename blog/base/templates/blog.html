@@ -32,6 +32,9 @@
          <span> </span> <span> </span> <small>{{ comment.user.username }}</small> <span></span><small>{{ comment.created | timesince }}</small> ago
          
             <h4>{{ comment.body }}</h4>
+            {% if comment.user == request.user %}
+            <a class="col-md2s btn btn-dark" href="{% url 'delete_comment' comment.id %}" class="dropdown-item">Delete</a>
+            {% endif %}
             <br><hr>
         {% endfor %}
         {% endif %}

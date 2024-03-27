@@ -1,8 +1,0 @@
-{% block content %}
-
-<form action="{% url 'comments' blogs.id %}" method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    
-</form>
-{% endblock %}

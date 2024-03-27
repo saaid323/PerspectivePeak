@@ -3,9 +3,9 @@
     <div class="container home">
         <div class="blog" >
             {% for blog in blogs %}
-            <a class="nav-link" href="{% url 'blog' blog.id %}">
+            <a class="" href="{% url 'blog' blog.id %}" style="color: black; text-decoration: none;">
             <div class="header_and_image">
-                <div>
+                <div class="header">
                     <h3 class="font-weight-light my-4">{{ blog.title }}</h3>
                 </div>
                 <div>
@@ -14,8 +14,8 @@
                 
                 </div>
             </div>
-            <h5 >{{ blog.body|slice:":120" | safe }}...</h5>
             </a>
+            <h5 >{{ blog.body|slice:":120" | safe }}...</h5>
             <small class="font-weight-light my-4">{{ blog.get_readtime }} read</small>
             <br> <br>
             {% if blog.author == request.user %}

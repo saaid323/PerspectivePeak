@@ -8,12 +8,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 # Create your views here.
 
 
 def home(request):
-    blogs = Blog.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    blogs = Blog.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
     context = {'blogs': blogs}
     return render(request, 'home.html', context)
 
@@ -159,3 +162,8 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('home')
 
 
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+    blog_pk = comment.blog.pk
+    comment.delete()
+    return redirect('blog', pk=blog_pk)

@@ -17,5 +17,5 @@ urlpatterns = [
     path('user-profile', views.profile, name='user-profile'),
     path('update-user', views.updateUser, name='update-user'),
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
-    
+    path('delete_comment/<str:pk>', views.delete_comment, name='delete_comment'),
 ]

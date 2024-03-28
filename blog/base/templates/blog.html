@@ -14,10 +14,14 @@
         <p>{{ blogs.body | safe }}</p>
         <hr>
         <br>
+        {% if request.user.is_authenticated %}
         <form action="" method="post"> {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
+        {% else %}
+        <h4>Login to comment</h4>
+        {% endif %}
         <hr>
         
 
@@ -38,7 +42,10 @@
             <br><hr>
         {% endfor %}
         {% endif %}
-        <br><br> <br>
+        <br>
+        <a class="col-md-4s btn btn-dark" href="{% url 'home' %}">Home</a>
+        <br><br>
+        <br>
         
         
     </div>

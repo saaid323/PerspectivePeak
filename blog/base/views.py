@@ -124,7 +124,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.first_name = user.email.lower()
+            user.username = user.username.lower()
             user.save()
             login(request, user)
             return redirect('home')

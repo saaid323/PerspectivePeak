@@ -10,8 +10,9 @@
                 </div>
                 <div>
                 
+                {% if blog.header_image %}
                 <p><img src="{{ blog.header_image.url  }}" alt="" style="width: 50%; margin-left: 90px;"></p>
-                
+                {% endif %}
                 </div>
             </div>
             </a>

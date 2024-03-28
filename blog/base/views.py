@@ -18,7 +18,7 @@ def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     blogs = Blog.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
     context = {'blogs': blogs}
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', context, {'blogs': blogs})
 
 
 def blog(request, pk):

@@ -15,10 +15,10 @@ from django.db.models import Q
 
 
 def home(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q', '')
     blogs = Blog.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
     context = {'blogs': blogs}
-    return render(request, 'home.html', context, {'blogs': blogs})
+    return render(request, 'home.html', context)
 
 
 def blog(request, pk):

@@ -17,7 +17,7 @@ from django.db.models import Q
 def home(request):
     q = request.GET.get('q', '')
     blogs = Blog.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
-    context = {'blogs': blogs}
+    context = {'blogs': blogs, "user": request.user}
     return render(request, 'home.html', context)
 
 

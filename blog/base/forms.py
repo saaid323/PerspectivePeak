@@ -7,8 +7,12 @@ from django.contrib.auth.models import User
 
 class BlogForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-          super().__init__(*args, **kwargs)
-          self.fields["body"].required = False
+        exclude_header_image = kwargs.pop('exclude_header_image', False)
+        super().__init__(*args, **kwargs)
+        self.fields["body"].required = False
+        if exclude_header_image:
+            del self.fields["header_image"]
+        
 
     class Meta:
         model = Blog

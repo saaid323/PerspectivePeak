@@ -78,9 +78,9 @@ def create_blog(request):
 
 def update_blog(request, pk):
     blog = Blog.objects.get(id=pk)
-    form = BlogForm(instance=blog, exclude_header_image=True)
+    form = BlogForm(instance=blog)
     if request.method == 'POST':
-        form = BlogForm(request.POST,  request.FILES, instance=blog, exclude_header_image=True)
+        form = BlogForm(request.POST,  request.FILES, instance=blog)
         if form.is_valid():
             form.save()
             return redirect('home')
